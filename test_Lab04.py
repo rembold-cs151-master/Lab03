@@ -6,20 +6,26 @@ Script for doing some automatic tests for Lab 3
 import pytest
 import mock
 
-import Lab03
+import Lab04
 
 
 def test_even_num_short_word(capsys):
     inputs = ["8", "egg"]
     with mock.patch('builtins.input', side_effect=inputs):
         output = Lab03.main()
-        assert output == "eggegg"
+        if Lab04.challenge:
+            assert output == "eggeggeggeggeggeggeggegg"
+        else:
+            assert output == "eggegg"
 
 def test_even_num_long_word(capsys):
-    inputs = ["42", "brocolli"]
+    inputs = ["6", "brocolli"]
     with mock.patch('builtins.input', side_effect=inputs):
         output = Lab03.main()
-        assert output == "brocollibrocolli"
+        if Lab04.challenge:
+            assert output == "brocollibrocollibrocollibrocollibrocollibrocolli"
+        else:
+            assert output == "brocollibrocolli"
 
 def test_odd_num_long_word(capsys):
     inputs = ["41", "brocolli"]
